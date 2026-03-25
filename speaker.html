@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speaker Cards | TEDx Sarasva</title>
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #05050f;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            color: #edf2ff;
+            padding: 2rem;
+        }
+
+        /* optional: import fonts if needed, but for card demo it's fine */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        .speakers-section {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            letter-spacing: -0.5px;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #7ef0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #0ff;
+            margin: 12px auto 0;
+            border-radius: 4px;
+            box-shadow: 0 0 8px cyan;
+        }
+
+        /* Speaker Grid */
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        /* Speaker Card */
+        .speaker-card {
+            background: rgba(8, 12, 28, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .speaker-card:hover {
+            transform: translateY(-6px);
+            border-color: #0ff;
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Image area */
+        .speaker-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(145deg, #0a1030, #020617);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+        }
+        .speaker-img i {
+            font-size: 5rem;
+            color: rgba(0, 255, 255, 0.7);
+            filter: drop-shadow(0 0 8px cyan);
+        }
+        /* you can replace with actual image later */
+        .speaker-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Content */
+        .speaker-info {
+            padding: 24px;
+            text-align: center;
+        }
+        .speaker-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            background: linear-gradient(120deg, #fff, #aaf0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .speaker-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #0ff;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 40px;
+        }
+        .speaker-bio {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #bbcaff;
+            margin-bottom: 20px;
+        }
+        .speaker-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 12px;
+        }
+        .speaker-social a {
+            color: #8e9eff;
+            font-size: 1.2rem;
+            transition: 0.2s;
+        }
+        .speaker-social a:hover {
+            color: #0ff;
+            transform: translateY(-2px);
+        }
+        .read-talk {
+            display: inline-block;
+            margin-top: 16px;
+            color: #0ff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed #0ff;
+            padding-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="speakers-section">
+        <h2 class="section-title">MEET THE SPEAKERS</h2>
+        <div class="speaker-grid">
+            <!-- Speaker Card 1 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-user-astronaut"></i>
+                    <!-- if you have actual images: <img src="speaker1.jpg" alt="Dr. Ananya Sharma"> -->
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Dr. Ananya Sharma</h3>
+                    <div class="speaker-title">AI Ethicist & Futurist</div>
+                    <p class="speaker-bio">Leading researcher in responsible AI, author of "The Human Algorithm". TEDx alumni and advisor to global tech councils.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "Conscious Code" →</a>
+                </div>
+            </div>
+
+            <!-- Speaker Card 2 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Rohan Mehta</h3>
+                    <div class="speaker-title">Quantum Computing Researcher</div>
+                    <p class="speaker-bio">MIT PhD candidate, founder of QubitIndia. Demystifying quantum supremacy with hands-on demos and visionary insights.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "The Next Silicon" →</a>
+                </div>
+            </div>
+
+            <!-- Speaker Card 3 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-chalkboard-user"></i>
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Neha Kapoor</h3>
+                    <div class="speaker-title">Creative Technologist & Artist</div>
+                    <p class="speaker-bio">Blending art, code, and immersive installations. Her work has been featured at Ars Electronica and Sundance New Frontier.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "Digital Poetry" →</a>
+                </div>
+            </div>
+
+            <!-- Speaker Card 4 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Aarav Singh</h3>
+                    <div class="speaker-title">Neurotech Entrepreneur</div>
+                    <p class="speaker-bio">CEO of MindLink, developing BCI wearables. Named Forbes 30 Under 30 for breakthrough innovations in human-computer interaction.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "The Augmented Self" →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>TEDx Sarasva | The Ultimate Ideas Fest</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #05050f;
+      font-family: 'Inter', 'Space Grotesk', sans-serif;
+      color: #edf2ff;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* animated grid background — similar to glitch/tech vibe */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* neon glow effect */
+    .glow-text {
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 200, 255, 0.3);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    /* LOGO PLACEHOLDER */
+    .logo-placeholder {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(0, 198, 255, 0.6);
+      transition: all 0.2s ease;
+    }
+    .logo-icon i {
+      font-size: 28px;
+      color: white;
+      filter: drop-shadow(0 0 4px black);
+    }
+    .logo-text h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(120deg, #ffffff, #80ffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .logo-text span {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #8e9eff;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #ccdeff;
+      transition: 0.2s;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover {
+      color: #0ff;
+      text-shadow: 0 0 6px cyan;
+    }
+    .flyer-btn {
+      background: rgba(0, 255, 255, 0.08);
+      border: 1.5px solid #0ff;
+      padding: 8px 20px;
+      border-radius: 60px;
+      font-weight: 700;
+      color: #0ff !important;
+      transition: 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .flyer-btn:hover {
+      background: #0ff;
+      color: #05050f !important;
+      box-shadow: 0 0 14px cyan;
+      border-color: cyan;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 70px 0 50px 0;
+      text-align: center;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #7ef0ff, #3a86ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+    .hero h2 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #b4c7ff;
+      margin: 20px 0 16px;
+    }
+    .hero-desc {
+      max-width: 680px;
+      margin: 20px auto;
+      font-size: 1.1rem;
+      color: #b0c4ff;
+    }
+    .hero-cta {
+      margin-top: 32px;
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(95deg, #0ff, #0099ff);
+      border: none;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0a0a1a;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 14px rgba(0, 255, 255, 0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #0ff;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      color: #0ff;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px cyan;
+    }
+    .btn-outline:hover {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 12px cyan;
+    }
+
+    /* section headings */
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      text-align: center;
+      letter-spacing: -0.5px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #0ff;
+      margin: 12px auto 0;
+      border-radius: 4px;
+      box-shadow: 0 0 8px cyan;
+    }
+
+    /* ABOUT section */
+    .about-grid {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: rgba(10, 15, 30, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 40px 36px;
+      margin-bottom: 70px;
+    }
+    .about-text {
+      flex: 2;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #cfdfff;
+      margin-bottom: 20px;
+    }
+    .about-highlight {
+      flex: 1;
+      background: linear-gradient(145deg, rgba(0, 255, 255, 0.05), rgba(0, 100, 255, 0.05));
+      border-radius: 24px;
+      padding: 24px;
+      border-left: 3px solid #0ff;
+    }
+    .about-highlight i {
+      font-size: 2rem;
+      color: #0ff;
+      margin-bottom: 12px;
+    }
+
+    /* TIMELINE SECTION — inspired by event cards from images */
+    .timeline-section {
+      margin-bottom: 90px;
+    }
+    .day-group {
+      margin-bottom: 48px;
+    }
+    .day-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: rgba(0, 200, 255, 0.1);
+      display: inline-block;
+      padding: 6px 28px;
+      border-radius: 60px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(4px);
+      border-left: 4px solid #0ff;
+      letter-spacing: 1px;
+    }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .event-card {
+      background: rgba(8, 12, 28, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      padding: 24px;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    .event-card:hover {
+      transform: translateY(-6px);
+      border-color: #0ff;
+      box-shadow: 0 10px 28px rgba(0, 255, 255, 0.2);
+    }
+    .event-time {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #0ff;
+      background: rgba(0, 255, 255, 0.1);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 40px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .event-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .event-desc {
+      color: #bbcaff;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 16px 0;
+    }
+    .read-more {
+      color: #0ff;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px dashed #0ff;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .read-more i {
+      font-size: 0.75rem;
+      transition: transform 0.2s;
+    }
+    .read-more:hover {
+      color: #ffffff;
+      gap: 12px;
+    }
+    .read-more:hover i {
+      transform: translateX(4px);
+    }
+
+    /* CONTACT SECTION (similar to first image) */
+    .contact-section {
+      background: rgba(0, 10, 20, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      padding: 48px 40px;
+      margin-bottom: 70px;
+    }
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: space-between;
+    }
+    .contact-info {
+      flex: 1.2;
+    }
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 20px;
+      border-radius: 24px;
+      transition: 0.2s;
+    }
+    .contact-detail i {
+      font-size: 28px;
+      color: #0ff;
+      width: 44px;
+    }
+    .contact-detail p {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .contact-detail small {
+      color: #8aa0ff;
+    }
+    .urgent {
+      border-left: 3px solid #ff3388;
+      background: rgba(255, 51, 136, 0.05);
+    }
+    .urgent i {
+      color: #ff66aa;
+    }
+    .flyer-card {
+      flex: 0.9;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 32px;
+      padding: 32px;
+      text-align: center;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+    .flyer-card i {
+      font-size: 3rem;
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+    .flyer-card h4 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .flyer-btn-large {
+      background: transparent;
+      border: 1px solid #0ff;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: bold;
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #0ff;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 36px 0 32px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #8e9eff;
+    }
+    .footer a {
+      color: #0ff;
+      text-decoration: none;
+    }
+    .heart {
+      color: #ff3388;
+    }
+
+       @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        .speakers-section {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            letter-spacing: -0.5px;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #7ef0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #0ff;
+            margin: 12px auto 0;
+            border-radius: 4px;
+            box-shadow: 0 0 8px cyan;
+        }
+
+        /* Speaker Grid */
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        /* Speaker Card */
+        .speaker-card {
+            background: rgba(8, 12, 28, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .speaker-card:hover {
+            transform: translateY(-6px);
+            border-color: #0ff;
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Image area */
+        .speaker-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(145deg, #0a1030, #020617);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+        }
+        .speaker-img i {
+            font-size: 5rem;
+            color: rgba(0, 255, 255, 0.7);
+            filter: drop-shadow(0 0 8px cyan);
+        }
+        /* you can replace with actual image later */
+        .speaker-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Content */
+        .speaker-info {
+            padding: 24px;
+            text-align: center;
+        }
+        .speaker-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            background: linear-gradient(120deg, #fff, #aaf0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .speaker-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #0ff;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 40px;
+        }
+        .speaker-bio {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #bbcaff;
+            margin-bottom: 20px;
+        }
+        .speaker-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 12px;
+        }
+        .speaker-social a {
+            color: #8e9eff;
+            font-size: 1.2rem;
+            transition: 0.2s;
+        }
+        .speaker-social a:hover {
+            color: #0ff;
+            transform: translateY(-2px);
+        }
+        .read-talk {
+            display: inline-block;
+            margin-top: 16px;
+            color: #0ff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed #0ff;
+            padding-bottom: 2px;
+        }
+
+    /* responsive */
+    @media (max-width: 800px) {
+      .container {
+        padding: 0 24px;
+      }
+      .navbar {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .nav-links {
+        gap: 20px;
+        justify-content: center;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero h2 {
+        font-size: 1.3rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .about-grid {
+        flex-direction: column;
+      }
+      .contact-wrapper {
+        flex-direction: column;
+      }
+    }
+
+    /* custom scroll */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0ff;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header + Logo Placeholder -->
+  <nav class="navbar">
+    <div class="logo-placeholder">
+      <div class="logo-icon">
+        <i class="fas fa-microchip"></i>
+      </div>
+      <div class="logo-text">
+        <h1>TEDx Sarasva</h1>
+        <span>ideas worth spreading</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">ABOUT</a>
+      <a href="#timeline">TIMELINE</a>
+      <a href="#contact">CONTACT</a>
+      <!-- <a href="#" class="flyer-btn" id="flyerNavBtn"><i class="fas fa-ticket-alt"></i> EVENTFLYER_›</a>
+    </div> -->
+  </nav>
+
+  <!-- Hero Section with tech-fest energy -->
+  <div class="hero">
+    <div class="hero-badge">
+      <i class="fas fa-bolt"></i> organized by SARASVA 
+    </div>
+    <h1>TEDx Sarasva</h1>
+    <h2>with APK-THE ULTIMATE TECH FEST</h2>
+    <p class="hero-desc">
+      Where groundbreaking ideas collide with future tech — immersive talks, hackathons, and visionary experiences.
+      April 10-12, 2026 | IIITA Campus
+    </p>
+    <!-- <div class="hero-cta">
+      <button class="btn-primary" id="flyerHeroBtn"><i class="fas fa-download"></i> GRAB FLYER</button>
+      <button class="btn-outline" onclick="location.href='#timeline'"><i class="far fa-calendar-alt"></i> EXPLORE TIMELINE</button>
+    </div> -->
+  </div>
+
+  <!-- ABOUT Section -->
+  <section id="about">
+    <h2 class="section-title">ABOUT THE Event</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p><strong>TEDx Sarasva</strong> is an Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis doloremque natus reiciendis quod sapiente, officia obcaecati possimus nobis esse voluptate?</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit distinctio voluptatum, molestiae impedit harum, tempore atque veniam exercitationem numquam voluptate quibusdam, nisi nam asperiores minus ex? Debitis magni mollitia, voluptatibus corporis facere quis consectetur quasi.</p>
+    <p><i class="fas fa-map-marker-alt" style="color:#0ff;"></i> Venue: IIITA Campus | <i class="far fa-clock"></i> xx-xx-xx</p></div>
+      <div class="about-highlight">
+        <i class="fas fa-quote-right"></i>
+        <p style="font-style: italic; font-weight: 500;">"SOmething SOMEthing SomeTHinf SoMething  SOMETHing "</p>
+        <p style="margin-top: 16px;">— Team Sarasva</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE section inspired by given images: DAY -1, DAY.0 style -->
+  <section id="timeline">
+    <h2 class="section-title">EVENT TIMELINE</h2>
+    <div class="timeline-section">
+      
+      <!-- DAY -1 : Cicada Night Quest -->
+      <!-- <div class="day-group">
+        <div class="day-title"><i class="fas fa-moon"></i> DAY -1 | MIDNIGHT EDGE</div>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-time"><i class="far fa-clock"></i> 8:30pm – 4:00am (next day)</div>
+            <h3>CICADA: NIGHT QUEST</h3>
+            <p class="event-desc">A whole night treasure hunt like event where clues will be hidden across digital & physical realms. Solve puzzles, crack codes, and unlock the ultimate mystery. Collaborative & adrenaline-fueled.</p>
+            <a class="read-more" data-info="CICADA: Immersive night-long puzzle hunt with AR elements, prizes, and legend status. More details revealed at venue!">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <!-- additional pre-night vibe card (optional synergy) -->
+          <!-- <div class="event-card">
+            <div class="event-time"><i class="fas fa-wifi"></i> 10:00pm – 2:00am</div>
+            <h3>HACK THE VIBE</h3>
+            <p class="event-desc">Live coding battle & cyber den — network with mentors while enjoying neon-lit zones. DJ set & interactive installations.</p>
+            <a class="read-more" data-info="Live coding, VR demo & networking night. Be there!">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div> --> -->
+
+      <!-- DAY.0 : Inauguration + Quant Sim Trading / PokerBots (exactly like images) -->
+      <!-- <div class="day-group">
+        <div class="day-title"><i class="fas fa-sun"></i> DAY.0 | KICKOFF SPECTRUM</div>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-time"><i class="fas fa-chart-line"></i> 4:00pm – 6:00pm</div>
+            <h3>QUANT SIM TRADING / POKERBOTS</h3>
+            <p class="event-desc">High-frequency trading sim meets AI poker bots — compete with algorithms and human strategy. Real-time markets & bluffing logic.</p>
+            <a class="read-more" data-info="Register for Quant battle or PokerBot arena. Leaderboard prizes!">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="event-card">
+            <div class="event-time"><i class="fas fa-flag-checkered"></i> 6:00pm – 8:00pm</div>
+            <h3>INAUGURATION CEREMONY</h3>
+            <p class="event-desc">Official inauguration of TEDx Sarasva with keynote speaker, lightning demos, and cultural ignition. Be part of the opening night energy.</p>
+            <a class="read-more" data-info="Special guest: Futurist Dr. Ananya Rao. Free entry for all pass holders.">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- DAY 1 : main TEDx talks & workshops -->
+      <!-- <div class="day-group">
+        <div class="day-title"><i class="fas fa-microphone-alt"></i> Speaker List</div>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-time"><i class="fas fa-chalkboard-user"></i> 10:00am – 1:00pm</div>
+            <h3>MAIN STAGE: TEDx TALKS</h3>
+            <p class="event-desc">Curated talks from industry pioneers, artists, and tech visionaries. Explore AI ethics, space tech, and creative breakthroughs.</p>
+            <a class="read-more" data-info="Speaker lineup: Dr. Sarah Chen, Rohan Malhotra, and surprise guest. Live Q&A.">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="event-card">
+            <div class="event-time"><i class="fas fa-robot"></i> 2:00pm – 4:00pm</div>
+            <h3>PANEL: FUTURE OF AI & ETHICS</h3>
+            <p class="event-desc">Debate on responsible AI, deepfakes, and human-centered design. With experts from academia and industry.</p>
+            <a class="read-more" data-info="Interactive panel + audience challenge. Certificates for participants.">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="event-card">
+            <div class="event-time"><i class="fas fa-paintbrush-fine"></i> 4:30pm – 7:00pm</div>
+            <h3>WORKSHOP: DESIGN THINKING</h3>
+            <p class="event-desc">Hands-on prototyping & innovation sprint. Build solutions for real-world problems, guided by design mentors.</p>
+            <a class="read-more" data-info="Limited seats — first come first serve. Materials included.">READ MORE <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div> -->
+       <div class="speakers-section">
+        <h2 class="section-title">MEET THE SPEAKERS</h2>
+        <div class="speaker-grid">
+            <!-- Speaker Card 1 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-user-astronaut"></i>
+                    <!-- if you have actual images: <img src="speaker1.jpg" alt="Dr. Ananya Sharma"> -->
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Dr. Aaaaaa Sharma</h3>
+                    <div class="speaker-title">AI Ethicist & Futurist</div>
+                    <p class="speaker-bio">Leading researcher in responsible AI, author of "The Human Algorithm". TEDx alumni and advisor to global tech councils.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "Conscious Code" →</a>
+                </div>
+            </div>
+
+            <!-- Speaker Card 2 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Rrrrrr Mehta</h3>
+                    <div class="speaker-title">Quantum Computing Researcher</div>
+                    <p class="speaker-bio">MIT PhD candidate, founder of QubitIndia. Demystifying quantum supremacy with hands-on demos and visionary insights.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "The Next Silicon" →</a>
+                </div>
+            </div>
+
+            <!-- Speaker Card 3 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-chalkboard-user"></i>
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Nnnnn Kapoor</h3>
+                    <div class="speaker-title">Creative Technologist & Artist</div>
+                    <p class="speaker-bio">Blending art, code, and immersive installations. Her work has been featured at Ars Electronica and Sundance New Frontier.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "Digital Poetry" →</a>
+                </div>
+            </div>
+
+            <!-- Speaker Card 4 -->
+            <div class="speaker-card">
+                <div class="speaker-img">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="speaker-info">
+                    <h3 class="speaker-name">Aaaaaa Singh</h3>
+                    <div class="speaker-title">Neurotech Entrepreneur</div>
+                    <p class="speaker-bio">CEO of MindLink, developing BCI wearables. Named Forbes 30 Under 30 for breakthrough innovations in human-computer interaction.</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <a href="#" class="read-talk">Talk: "The Augmented Self" →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- CONTACT section - exactly from first image's style: EMAIL, PHONE, urgent inquiries -->
+  <section id="contact">
+    <h2 class="section-title">CONNECT WITH US</h2>
+    <div class="contact-section">
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3><i class="fas fa-paper-plane"></i> REACH OUT</h3>
+          <div class="contact-detail">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <p>sarasva.society@iiita.ac.in</p>
+              <small>General inquiries & partnerships</small>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <p>+91 XXXXX YYYYY</p>
+              <small>Mon–Sat, 10am – 7pm</small>
+            </div>
+          </div>
+          <!-- <div class="contact-detail urgent">
+            <i class="fas fa-bolt"></i>
+            <div>
+              <p>urgent@tedxsarasva.com</p>
+              <small>For urgent inquiries | 24h response</small>
+            </div>
+          </div> -->
+          <div class="contact-detail">
+            <i class="fab fa-instagram"></i>
+            <div>
+              <p>@sarasva_iiita</p>
+              <small>Live updates</small>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="flyer-card">
+          <i class="fas fa-ticket-alt"></i>
+          <h4>EVENTFLYER_›</h4>
+          <p>Download the official event flyer with schedule map, secret perks & venue blueprint.</p>
+          <button class="flyer-btn-large" id="flyerContactBtn"><i class="fas fa-file-pdf"></i> GET FLYER (PDF)</button>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER with design credit -->
+  <div class="footer">
+    <p>DESIGNED <span class="heart"></span> FOR TEDx Sarasva • Organized by Sarasva Collective</p>
+    <p style="margin-top: 12px;">© 2026 TEDx Sarasva. ALL RIGHTS RESERVED | APK</p>
+    <p style="margin-top: 8px; font-size: 0.7rem;"><i class="fas fa-globe"></i> Embrace the future. #TEDxSarasva</p>
+  </div>
+</div>
+
+<script>
+  // "READ MORE" interactive alerts for each card — keeps the design functional & engaging
+  const readMoreLinks = document.querySelectorAll('.read-more');
+  readMoreLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const info = link.getAttribute('data-info') || "More details will be announced soon. Stay tuned!";
+      alert(`🔮 ${info}`);
+    });
+  });
+
+  // Flyer buttons (simulate flyer download / info)
+  const flyerBtns = document.querySelectorAll('#flyerNavBtn, #flyerHeroBtn, #flyerContactBtn');
+  flyerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("✨ EVENT FLYER ✨\n\nTEDx Sarasva 2026\nDates: March 20-22\nVenue: IIITA Campus & Digital Hub\n\nFull schedule + surprise activations available at registration desk.\n\nStay tuned — limited early access!");
+    });
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#") return;
+      const targetElement = document.querySelector(targetId);
+      if(targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+  // smooth for hero button too
+  document.querySelector('.btn-outline').addEventListener('click', (e) => {
+    const timelineSection = document.querySelector('#timeline');
+    if(timelineSection) timelineSection.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
