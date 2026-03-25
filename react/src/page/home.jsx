@@ -121,7 +121,7 @@ export default function TEDxIIITA() {
   const css = `
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0a0a0a; color: #f0ede8; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+    html, body { background: #0a0a0a; color: #f0ede8; font-family: 'DM Sans', sans-serif; overflow-x: hidden; max-width: 100%; }
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -211,11 +211,30 @@ export default function TEDxIIITA() {
     }
     @media (max-width: 768px) {
       .desktop-nav { display: none !important; }
+      .register-btn-nav { display: none !important; }
       .mobile-menu-btn { display: flex !important; }
     }
     @media (min-width: 769px) {
       .mobile-menu-btn { display: none !important; }
-      .mobile-nav { display: none !important; }
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(10,10,10,0.98);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .mobile-nav.open {
+      display: flex;
+      max-height: 500px;
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      .mobile-nav { display: flex; }
     }
   `;
 
@@ -227,67 +246,98 @@ export default function TEDxIIITA() {
       {/* NAVBAR */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        padding: "1rem 3rem",
-        background: scrolled ? "rgba(10,10,10,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+        background: scrolled || menuOpen ? "rgba(10,10,10,0.98)" : "transparent",
+        backdropFilter: scrolled || menuOpen ? "blur(20px)" : "none",
+        borderBottom: scrolled || menuOpen ? "1px solid rgba(255,255,255,0.06)" : "none",
         transition: "all 0.4s",
-        display: "flex", alignItems: "center", justifyContent: "space-between"
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <span style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "1.5rem", letterSpacing: "0.08em",
-            color: "#fff"
-          }}>
-            <span style={{ color: "#eb2d2d" }}>TEDx</span>IIITA
-          </span>
-        </div>
-
-        <div className="desktop-nav" style={{ display: "flex", gap: "2rem" }}>
-          {NAV_LINKS.map(l => (
-            <a key={l} href="#" className="nav-link"
-              onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); }}>
-              {l}
-            </a>
-          ))}
-        </div>
-
-        <button className="register-btn" style={{ padding: "0.55rem 1.4rem", fontSize: "0.85rem" }}
-          onClick={() => scrollTo("contact")}>
-          Register
-        </button>
-
-        <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", flexDirection: "column", gap: "5px", display: "none" }}>
-          {[0, 1, 2].map(i => (
-            <span key={i} style={{ display: "block", width: "24px", height: "2px", background: "#fff", transition: "all 0.3s" }} />
-          ))}
-        </button>
-      </nav>
-
-      {/* MOBILE NAV */}
-      {menuOpen && (
-        <div className="mobile-nav" style={{
-          position: "fixed", top: "60px", left: 0, right: 0, zIndex: 99,
-          background: "rgba(10,10,10,0.98)", padding: "2rem",
-          display: "flex", flexDirection: "column", gap: "1.5rem"
+        {/* Top bar */}
+        <div style={{
+          padding: "1rem 2rem",
+          display: "flex", alignItems: "center", justifyContent: "space-between"
         }}>
-          {NAV_LINKS.map(l => (
-            <a key={l} href="#" className="nav-link" style={{ fontSize: "1.1rem" }}
-              onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <span style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "1.5rem", letterSpacing: "0.08em",
+              color: "#fff"
+            }}>
+              <span style={{ color: "#eb2d2d" }}>TEDx</span>IIITA
+            </span>
+          </div>
+
+          <div className="desktop-nav" style={{ display: "flex", gap: "2rem" }}>
+            {NAV_LINKS.map(l => (
+              <a key={l} href="#" className="nav-link"
+                onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); }}>
+                {l}
+              </a>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <button className="register-btn register-btn-nav" style={{ padding: "0.55rem 1.4rem", fontSize: "0.85rem" }}
+              onClick={() => scrollTo("contact")}>
+              Register
+            </button>
+
+            {/* Hamburger */}
+            <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)}
+              style={{
+                background: "none", border: "none", cursor: "pointer",
+                flexDirection: "column", gap: "5px", padding: "4px",
+              }}>
+              <span style={{
+                display: "block", width: "24px", height: "2px", background: "#fff",
+                transition: "all 0.3s",
+                transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none"
+              }} />
+              <span style={{
+                display: "block", width: "24px", height: "2px", background: "#fff",
+                transition: "all 0.3s",
+                opacity: menuOpen ? 0 : 1
+              }} />
+              <span style={{
+                display: "block", width: "24px", height: "2px", background: "#fff",
+                transition: "all 0.3s",
+                transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none"
+              }} />
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile dropdown — inside nav so it sits flush below */}
+        <div className={`mobile-nav${menuOpen ? " open" : ""}`}>
+          {NAV_LINKS.map((l, i) => (
+            <a key={l} href="#" className="nav-link"
+              onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); setMenuOpen(false); }}
+              style={{
+                fontSize: "1rem", padding: "1rem 2rem",
+                borderBottom: i < NAV_LINKS.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                display: "block",
+                transition: `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`,
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
+              }}>
               {l}
             </a>
           ))}
+          <div style={{ padding: "1rem 2rem 1.5rem" }}>
+            <button className="register-btn" style={{ width: "100%", fontSize: "0.95rem" }}
+              onClick={() => { scrollTo("contact"); setMenuOpen(false); }}>
+              Register Now →
+            </button>
+          </div>
         </div>
-      )}
+      </nav>
 
       {/* HERO */}
       <section id="home" ref={heroRef} style={{
         minHeight: "100vh", display: "flex", flexDirection: "column",
         alignItems: "center", justifyContent: "center",
         position: "relative", overflow: "hidden",
-        padding: "8rem 2rem 4rem"
+        padding: "7rem 1.25rem 5rem",
+        boxSizing: "border-box", width: "100%",
       }}>
         {/* BG grid */}
         <div style={{
@@ -301,31 +351,36 @@ export default function TEDxIIITA() {
 
         {/* Red glow blobs */}
         <div style={{
-          position: "absolute", top: "20%", left: "15%", width: "400px", height: "400px",
+          position: "absolute", top: "20%", left: "5%", width: "300px", height: "300px",
           borderRadius: "50%", background: "radial-gradient(circle, rgba(235,45,45,0.12) 0%, transparent 70%)",
           filter: "blur(40px)", pointerEvents: "none"
         }} />
         <div style={{
-          position: "absolute", bottom: "10%", right: "10%", width: "300px", height: "300px",
+          position: "absolute", bottom: "10%", right: "5%", width: "250px", height: "250px",
           borderRadius: "50%", background: "radial-gradient(circle, rgba(235,45,45,0.08) 0%, transparent 70%)",
           filter: "blur(40px)", pointerEvents: "none"
         }} />
 
-        <div style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: "900px" }}>
+        <div style={{
+          position: "relative", zIndex: 1, textAlign: "center",
+          width: "100%", maxWidth: "900px",
+          padding: "0", boxSizing: "border-box",
+        }}>
           <p style={{
-            fontSize: "0.7rem", letterSpacing: "0.35em", color: "#eb2d2d",
-            textTransform: "uppercase", marginBottom: "1.5rem",
+            fontSize: "0.65rem", letterSpacing: "0.15em", color: "#eb2d2d",
+            textTransform: "uppercase", marginBottom: "1.2rem",
             animation: "fadeSlideUp 0.6s ease forwards"
           }}>
-            ✦ IIIT Allahabad presents ✦
+            ✦ IIIT Allahabad Presents ✦
           </p>
 
           <h1 style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(4rem, 12vw, 10rem)",
+            fontSize: "clamp(3.5rem, 18vw, 10rem)",
             lineHeight: 0.9, letterSpacing: "0.04em",
             marginBottom: "0.5rem",
-            animation: "fadeSlideUp 0.8s ease 0.2s forwards", opacity: 0
+            animation: "fadeSlideUp 0.8s ease 0.2s forwards", opacity: 0,
+            wordBreak: "keep-all",
           }}>
             <span style={{ color: "#eb2d2d" }}>TED</span>
             <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.6em" }}>x</span>
@@ -334,16 +389,17 @@ export default function TEDxIIITA() {
 
           <p style={{
             fontFamily: "'DM Serif Display', serif", fontStyle: "italic",
-            fontSize: "clamp(1.2rem, 3vw, 1.8rem)", color: "rgba(240,237,232,0.7)",
-            marginBottom: "3rem",
+            fontSize: "clamp(1rem, 4vw, 1.8rem)", color: "rgba(240,237,232,0.7)",
+            marginBottom: "2.5rem",
             animation: "fadeSlideUp 0.8s ease 0.4s forwards", opacity: 0
           }}>
             Ideas Worth Spreading
           </p>
 
+          {/* Event info — stacks to 1 col on mobile */}
           <div style={{
-            display: "flex", gap: "3rem", justifyContent: "center", flexWrap: "wrap",
-            marginBottom: "3rem",
+            display: "flex", gap: "1.5rem", justifyContent: "center",
+            flexWrap: "wrap", marginBottom: "2.5rem",
             animation: "fadeSlideUp 0.8s ease 0.6s forwards", opacity: 0
           }}>
             {[
@@ -351,14 +407,21 @@ export default function TEDxIIITA() {
               ["🎤 SPEAKERS", "8 Brilliant Minds"],
               ["📍 VENUE", "Auditorium, IIITA"],
             ].map(([label, val]) => (
-              <div key={label} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "#eb2d2d", marginBottom: "4px" }}>{label}</div>
-                <div style={{ fontSize: "0.95rem", color: "#f0ede8", fontWeight: 500 }}>{val}</div>
+              <div key={label} style={{
+                textAlign: "center",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "8px",
+                padding: "0.6rem 1.2rem",
+                minWidth: "120px",
+              }}>
+                <div style={{ fontSize: "0.55rem", letterSpacing: "0.15em", color: "#eb2d2d", marginBottom: "4px" }}>{label}</div>
+                <div style={{ fontSize: "0.85rem", color: "#f0ede8", fontWeight: 500 }}>{val}</div>
               </div>
             ))}
           </div>
 
-          <div style={{ animation: "fadeSlideUp 0.8s ease 0.8s forwards", opacity: 0, marginBottom: "3rem" }}>
+          <div style={{ animation: "fadeSlideUp 0.8s ease 0.8s forwards", opacity: 0, marginBottom: "2.5rem" }}>
             <CountdownTimer />
           </div>
 
@@ -389,8 +452,9 @@ export default function TEDxIIITA() {
 
       {/* STATS BAR */}
       <div style={{
-        background: "#eb2d2d", padding: "1.2rem 3rem",
-        display: "flex", justifyContent: "center", gap: "4rem", flexWrap: "wrap"
+        background: "#eb2d2d", padding: "1.2rem 2rem",
+        display: "flex", justifyContent: "center",
+        gap: "clamp(1rem, 5vw, 4rem)", flexWrap: "wrap"
       }}>
         {STATS.map(({ value, label }) => (
           <div key={label} style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
