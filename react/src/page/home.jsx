@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const NAV_LINKS = ["Home", "About", "Theme", "Speakers", "Past Editions", "Team", "Contact"];
 
 const STATS = [
-  { value: "6+", label: "Speakers" },
+  { value: "16+", label: "Speakers" },
   { value: "2000+", label: "Community" },
   { value: "2015", label: "Est. Year" },
   { value: "7+", label: "Editions" },
@@ -13,7 +14,7 @@ const FEATURES = [
   {
     icon: "📍",
     title: "LOCATION",
-    desc: "Nestled in the cultural heart of Prayagraj, IIIT Allahabad provides the perfect backdrop for ideas worth spreading.",
+    desc: "Auditorium, IIIT Allahabad ,jalwar, Allahabad, Uttar Pradesh 211015",
   },
   {
     icon: "🌐",
@@ -33,21 +34,22 @@ const FEATURES = [
 ];
 
 const PAST_SPEAKERS = [
-  { name: "Dr. Ananya Sharma", topic: "AI & Human Consciousness", year: "2023" },
-  { name: "Rajan Mehta", topic: "Rethinking Education", year: "2023" },
-  { name: "Priya Nair", topic: "Climate Futures", year: "2022" },
-  { name: "Aditya Verma", topic: "Startup Mindset", year: "2022" },
-  { name: "Dr. Kavita Singh", topic: "Neuroscience of Creativity", year: "2021" },
-  { name: "Siddharth Rao", topic: "The Invisible Internet", year: "2021" },
+  { name: "Himanshu", topic: "ejbfiwfelwfh ws", year: "2006" },
+  // { name: "Rajan Mehta", topic: "Rethinking Education", year: "2023" },
+  // { name: "Priya Nair", topic: "Climate Futures", year: "2022" },
+  // { name: "Aditya Verma", topic: "Startup Mindset", year: "2022" },
+  // { name: "Dr. Kavita Singh", topic: "Neuroscience of Creativity", year: "2021" },
+  // { name: "Siddharth Rao", topic: "The Invisible Internet", year: "2021" },
 ];
 
 function CountdownTimer() {
-  const eventDate = new Date("2025-11-15T17:30:00");
+  const eventDate = new Date(2026, 3, 19, 14, 30, 0); 
   const [timeLeft, setTimeLeft] = useState({});
 
   useEffect(() => {
     const calc = () => {
       const diff = eventDate - new Date();
+     
       if (diff <= 0) return setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
       setTimeLeft({
         d: Math.floor(diff / 86400000),
@@ -267,12 +269,38 @@ export default function TEDxIIITA() {
           </div>
 
           <div className="desktop-nav" style={{ display: "flex", gap: "2rem" }}>
-            {NAV_LINKS.map(l => (
+            {NAV_LINKS.map((l, i) => {
+  const isTeam = l === "Team";
+
+  if (isTeam) {
+    return (
+      <Link key={l} to="/team" className="nav-link">
+        {l}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      key={l}
+      href="#"
+      className="nav-link"
+      onClick={e => {
+        e.preventDefault();
+        scrollTo(l.toLowerCase().replace(/ /g, "-"));
+        setMenuOpen(false);
+      }}
+    >
+      {l}
+    </a>
+  );
+})}
+            {/* {NAV_LINKS.map(l => (
               <a key={l} href="#" className="nav-link"
                 onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); }}>
                 {l}
               </a>
-            ))}
+            ))} */}
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -308,8 +336,44 @@ export default function TEDxIIITA() {
 
         {/* Mobile dropdown — inside nav so it sits flush below */}
         <div className={`mobile-nav${menuOpen ? " open" : ""}`}>
-          {NAV_LINKS.map((l, i) => (
-            <a key={l} href="#" className="nav-link"
+          {NAV_LINKS.map((l, i) => {
+  const isTeam = l === "Team";
+
+  return (
+    <a
+      key={l}
+      href={isTeam ? "/team" : "#"}
+      className="nav-link"
+      onClick={e => {
+        if (!isTeam) {
+          e.preventDefault();
+          scrollTo(l.toLowerCase().replace(/ /g, "-"));
+        }
+        setMenuOpen(false);
+      }}
+      style={{
+        fontSize: "1rem",
+        padding: "1rem 2rem",
+        borderBottom:
+          i < NAV_LINKS.length - 1
+            ? "1px solid rgba(255,255,255,0.05)"
+            : "none",
+        display: "block",
+        transition: `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${
+          i * 0.05
+        }s`,
+        opacity: menuOpen ? 1 : 0,
+        transform: menuOpen
+          ? "translateX(0)"
+          : "translateX(-10px)",
+      }}
+    >
+      {l}
+    </a>
+  );
+})}
+          {/* {NAV_LINKS.map((l, i) => (
+            if(l==="Team")  {  return (<a key={l} href="#" className="nav-link"
               onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); setMenuOpen(false); }}
               style={{
                 fontSize: "1rem", padding: "1rem 2rem",
@@ -320,8 +384,20 @@ export default function TEDxIIITA() {
                 transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
               }}>
               {l}
-            </a>
-          ))}
+            </a>);}
+           return (<a key={l} href="#" className="nav-link"
+              onClick={e => { e.preventDefault(); scrollTo(l.toLowerCase().replace(/ /g, "-")); setMenuOpen(false); }}
+              style={{
+                fontSize: "1rem", padding: "1rem 2rem",
+                borderBottom: i < NAV_LINKS.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                display: "block",
+                transition: `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`,
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
+              }}>
+              {l}
+            </a>)
+          ))} */}
           <div style={{ padding: "1rem 2rem 1.5rem" }}>
             <button className="register-btn" style={{ width: "100%", fontSize: "0.95rem" }}
               onClick={() => { scrollTo("contact"); setMenuOpen(false); }}>
@@ -371,7 +447,7 @@ export default function TEDxIIITA() {
             textTransform: "uppercase", marginBottom: "1.2rem",
             animation: "fadeSlideUp 0.6s ease forwards"
           }}>
-            ✦ IIIT Allahabad Presents ✦
+            ✦ Sarasva Presents ✦
           </p>
 
           <h1 style={{
@@ -393,7 +469,7 @@ export default function TEDxIIITA() {
             marginBottom: "2.5rem",
             animation: "fadeSlideUp 0.8s ease 0.4s forwards", opacity: 0
           }}>
-            Ideas Worth Spreading
+            Innovate , Inspire , Impact
           </p>
 
           {/* Event info — stacks to 1 col on mobile */}
@@ -403,8 +479,8 @@ export default function TEDxIIITA() {
             animation: "fadeSlideUp 0.8s ease 0.6s forwards", opacity: 0
           }}>
             {[
-              ["📅 DATE", "15th Nov, 2025 · 5:30 PM"],
-              ["🎤 SPEAKERS", "8 Brilliant Minds"],
+              ["📅 DATE", "19th Nov, 2026 · 2:30 PM"],
+              ["🎤 SPEAKERS", "4 Brilliant Minds"],
               ["📍 VENUE", "Auditorium, IIITA"],
             ].map(([label, val]) => (
               <div key={label} style={{
@@ -505,13 +581,13 @@ export default function TEDxIIITA() {
             fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3rem, 8vw, 7rem)",
             lineHeight: 0.95, marginBottom: "2rem", color: "#f0ede8"
           }}>
-            CONVERGENCE
+            Innovate , Inspire , Impact
           </h2>
           <p style={{
             fontFamily: "'DM Serif Display', serif", fontStyle: "italic",
             fontSize: "1.3rem", color: "rgba(240,237,232,0.6)", marginBottom: "2rem", lineHeight: 1.8
           }}>
-            When boundaries dissolve, possibilities emerge. Convergence explores the intersections — of technology and humanity, tradition and innovation, the individual and the collective.
+              Our 2025 theme, "Innovate, Inspire, Impact," encapsulates the essence of TEDxIIITA. It reflects our commitment to fostering groundbreaking ideas that not only push the boundaries of innovation but also inspire individuals to take action and create a meaningful impact on society. This theme serves as a call to our speakers and audience alike to think boldly, share passionately, and contribute to a future shaped by creativity and positive change.
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
             {["Technology", "Society", "Innovation", "Identity", "Future"].map(tag => (
@@ -532,7 +608,7 @@ export default function TEDxIIITA() {
           <h2 style={{
             fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(2.5rem, 5vw, 4rem)",
             color: "#f0ede8"
-          }}>PAST VOICES THAT SHAPED US</h2>
+          }}>Meet Our Speakers</h2>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
@@ -559,15 +635,15 @@ export default function TEDxIIITA() {
 
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
           <p style={{ color: "rgba(240,237,232,0.4)", fontSize: "0.85rem", marginBottom: "1.5rem" }}>
-            2025 speakers to be revealed soon...
+          
           </p>
-          <div style={{
+          {/* <div style={{
             display: "inline-flex", gap: "0.5rem", alignItems: "center",
             padding: "0.8rem 2rem", border: "1px dashed rgba(235,45,45,0.4)", borderRadius: "4px"
           }}>
-            <span style={{ animation: "pulse 1.5s infinite", color: "#eb2d2d" }}>●</span>
-            <span style={{ fontSize: "0.8rem", letterSpacing: "0.1em", color: "rgba(240,237,232,0.5)" }}>SPEAKER REVEAL COMING SOON</span>
-          </div>
+            <span style={{ animation: "pulse 1.5s infinite", color: "#eb2d2d" }}></span>
+            <span style={{ fontSize: "0.8rem", letterSpacing: "0.1em", color: "rgba(240,237,232,0.5)" }}></span>
+          </div> */}
         </div>
       </section>
 
