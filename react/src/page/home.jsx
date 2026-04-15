@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
+
 const NAV_LINKS = ["Home", "About", "Theme", "Speakers", "Past Editions", "Team", "Contact"];
 
 const STATS = [
@@ -34,14 +35,37 @@ const FEATURES = [
 ];
 
 const PAST_SPEAKERS = [
-  { name: "Himanshu", topic: "ejbfiwfelwfh ws", year: "2006" },
-  // { name: "Rajan Mehta", topic: "Rethinking Education", year: "2023" },
-  // { name: "Priya Nair", topic: "Climate Futures", year: "2022" },
-  // { name: "Aditya Verma", topic: "Startup Mindset", year: "2022" },
-  // { name: "Dr. Kavita Singh", topic: "Neuroscience of Creativity", year: "2021" },
-  // { name: "Siddharth Rao", topic: "The Invisible Internet", year: "2021" },
+  {
+    name: "Keerti Purswani",
+    topic: "Industry 4.0 and industry pedagogy",
+    year: "2026",
+    image: "/KP.jpg",
+  },
+  {
+    name: "PatilKaki (Mr. Darsheel Savla and Mr. Aryan Taukari)",
+    topic: "Digital Transformation of Traditional Business",
+    year: "2026",
+    image: "PK.jpg",
+  },
+    {
+    name: "Lt. Cdr. Bijay Nair",
+    topic: "Leadership & Strategic Discipline",
+    year: "2026",
+    image: "CB.jpg",
+  },
+    {
+    name: "Mr. Shreyans Sancheti",
+    topic: "Entrepreneurship & Resource Management",
+    year: "2026",
+    image: "SS.jpg",
+  },
+    {
+    name: "Ms. Simaran Kaur",
+    topic: " The Science of Voice Artistry & Creative Economy",
+    year: "2026",
+    image: "SK.jpg",
+  },
 ];
-
 function CountdownTimer() {
   const eventDate = new Date(2026, 3, 19, 14, 30, 0); 
   const [timeLeft, setTimeLeft] = useState({});
@@ -602,7 +626,7 @@ export default function TEDxIIITA() {
       </section>
 
       {/* SPEAKERS */}
-      <section id="speakers" style={{ padding: "7rem 3rem", maxWidth: "1100px", margin: "0 auto" }}>
+      {/* <section id="speakers" style={{ padding: "7rem 3rem", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", color: "#eb2d2d", marginBottom: "1rem" }}>OUR SPEAKERS</p>
           <h2 style={{
@@ -637,15 +661,117 @@ export default function TEDxIIITA() {
           <p style={{ color: "rgba(240,237,232,0.4)", fontSize: "0.85rem", marginBottom: "1.5rem" }}>
           
           </p>
-          {/* <div style={{
+          <div style={{
             display: "inline-flex", gap: "0.5rem", alignItems: "center",
             padding: "0.8rem 2rem", border: "1px dashed rgba(235,45,45,0.4)", borderRadius: "4px"
           }}>
             <span style={{ animation: "pulse 1.5s infinite", color: "#eb2d2d" }}></span>
             <span style={{ fontSize: "0.8rem", letterSpacing: "0.1em", color: "rgba(240,237,232,0.5)" }}></span>
-          </div> */}
+          </div>
         </div>
-      </section>
+      </section> */}
+
+      <section
+  id="speakers"
+  style={{ padding: "7rem 3rem", maxWidth: "1100px", margin: "0 auto" }}
+>
+  <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+    <p
+      style={{
+        fontSize: "0.65rem",
+        letterSpacing: "0.3em",
+        color: "#eb2d2d",
+        marginBottom: "1rem",
+      }}
+    >
+      OUR SPEAKERS
+    </p>
+    <h2
+      style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: "clamp(2.5rem, 5vw, 4rem)",
+        color: "#f0ede8",
+      }}
+    >
+      Meet Our Speakers
+    </h2>
+  </div>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+      gap: "1.5rem",
+    }}
+  >
+    {PAST_SPEAKERS.map(({ name, topic, year, image }) => (
+      <div key={name} className="speaker-card">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            marginBottom: "0.8rem",
+          }}
+        >
+          {/* IMAGE */}
+          <img
+            src={image}
+            alt={name}
+            style={{
+              width: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "2px solid rgba(235,45,45,0.5)",
+            }}
+          />
+
+          <div>
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                color: "#f0ede8",
+              }}
+            >
+              {name}
+            </div>
+            <div
+              style={{
+                fontSize: "0.65rem",
+                letterSpacing: "0.1em",
+                color: "#eb2d2d",
+              }}
+            >
+              {year}
+            </div>
+          </div>
+        </div>
+
+        <p
+          style={{
+            fontSize: "0.85rem",
+            color: "rgba(240,237,232,0.55)",
+            fontStyle: "italic",
+          }}
+        >
+          "{topic}"
+        </p>
+      </div>
+    ))}
+  </div>
+
+  <div style={{ textAlign: "center", marginTop: "3rem" }}>
+    <p
+      style={{
+        color: "rgba(240,237,232,0.4)",
+        fontSize: "0.85rem",
+        marginBottom: "1.5rem",
+      }}
+    ></p>
+  </div>
+</section>
 
       {/* WHAT IS TEDX */}
       <section style={{
